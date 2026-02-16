@@ -70,10 +70,10 @@ Created Terraform configuration (main.tf) including:
 * user data to install Docker and run the Strapi container
 
 Initialized Terraform:
-Terraform init
-Terraform plan
-Terraform apply
-Terraform Destroy
+* Terraform init
+* Terraform plan
+* Terraform apply
+* Terraform Destroy
 
 # Project Environment Configuration
 
@@ -91,7 +91,8 @@ ADMIN_JWT_SECRET=adminsecret123
 JWT_SECRET=jwtsecret123
 
 
-4️⃣ Terraform Configuration
+
+Terraform Configuration
 
 Key resources in main.tf:
 
@@ -109,6 +110,11 @@ Get EC2 public IP from AWS Console
 Open browser:http://<EC2_PUBLIC_IP>:1337/admin
 
 Login with admin credentials you set on first run
+
+**Commands used **
+
+
+
 
 
 
