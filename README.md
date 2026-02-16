@@ -1,61 +1,106 @@
-# 🚀 Getting started with Strapi
+📦 Strapi Deployment Automation with GitHub Actions & Terraform
+Project Overview
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+This project demonstrates a full CI/CD pipeline for deploying a Strapi Headless CMS application on AWS EC2 using:
 
-### `develop`
+* Docker – containerize Strapi
+* GitHub Actions – CI to build and push Docker images
+* Terraform – infrastructure as code to provision EC2 and deploy Strapi
+* AWS – EC2 instance hosting the application
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+The goal is to automate deployment so that any code push triggers a Docker image build, which can then be manually deployed to EC2 via Terraform.
 
-```
-npm run develop
-# or
-yarn develop
-```
+Features
 
-### `start`
+✅ Continuous Integration (CI) – Docker build & push on every push to main branch
+✅ Manual Continuous Deployment (CD) – Terraform workflow deploys updated image to EC2
+✅ Automated EC2 setup – Docker installed & Strapi container launched
+✅ Public access – Strapi admin accessible via EC2 public IP
+✅ Environment variable management – .env file for secure configuration
+✅ Infrastructure as Code – VPC, subnet, security groups, and EC2 managed by Terraform
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+Architecture
 
-```
-npm run start
-# or
-yarn start
-```
+GitHub Push
+   ↓
+GitHub Actions (CI)
+   ↓
+Docker Hub (image stored)
+   ↓
+Terraform workflow (manual)
+   ↓
+EC2 pulls new image & runs Strapi
+   ↓
+Strapi available on public IP
 
-### `build`
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+Prerequisites
 
-```
-npm run build
-# or
-yarn build
-```
+* AWS account with programmatic access (Access Key & Secret Key)
+* GitHub repository
+* Docker Hub account
+* Terraform installed locally or via GitHub Actions
+* SSH key for EC2 access
 
-## ⚙️ Deployment
+Project Setup
+1️⃣ CI Pipeline (GitHub Actions)
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+File: .github/workflows/ci.yml
 
-```
-yarn strapi deploy
-```
+* Runs on push to main
+* Builds Docker image
+* Pushes to Docker Hub
+* Saves image tag as output
 
-## 📚 Learn more
+  Add GitHub Secrets:
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+ * DOCKER_USERNAME Eg:noorjahan79
+ * DOCKER_PASSWORD  Eg: from dockerhub access token password.
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
 
-## ✨ Community
 
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
 
----
 
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+
+  3️⃣ Environment Variables
+  Create .env for Strapi configuration:
+
+ HOST=0.0.0.0
+PORT=1337
+
+APP_KEYS=key1,key2,key3,key4
+API_TOKEN_SALT=salt123
+ADMIN_JWT_SECRET=adminsecret123
+JWT_SECRET=jwtsecret123
+
+4️⃣ Terraform Configuration
+
+Key resources in main.tf:
+
+* VPC, Subnet, Internet Gateway
+* Security Group for SSH & Strapi port (1337)
+* EC2 instance with user_data launching Docker container
+
+Example snippet:
+* docker run -d --name strapi -p 1337:1337 noorjahan79/strapi:${IMAGE_TAG}
+
+5️⃣ Accessing Strapi
+
+Get EC2 public IP from AWS Console
+
+Open browser:http://<EC2_PUBLIC_IP>:1337/admin
+
+Login with admin credentials you set on first run
+
+
+
+
+
+  
+
+
+
+
+
+
+  
