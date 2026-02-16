@@ -75,9 +75,11 @@ Initialized Terraform:
 * Terraform apply
 * Terraform Destroy
 
-# Project Environment Configuration
+# Project Setup
 
-Create a `.env` file in the root of your project with the following content:
+## Server Configuration
+
+Create a `.env` file in the root of your project:
 
 ```env
 # Server configuration
@@ -91,34 +93,15 @@ ADMIN_JWT_SECRET=adminsecret123
 JWT_SECRET=jwtsecret123
 
 
-
 Terraform Configuration
 
-Key resources in main.tf:
+Key resources defined in main.tf:
 
 * VPC, Subnet, Internet Gateway
 * Security Group for SSH & Strapi port (1337)
 * EC2 instance with user_data launching Docker container
 
-Example snippet:
-* docker run -d --name strapi -p 1337:1337 noorjahan79/strapi:${IMAGE_TAG}
-
-5️⃣ Accessing Strapi
-
-Get EC2 public IP from AWS Console
-
-Open browser:http://<EC2_PUBLIC_IP>:1337/admin
-
-Login with admin credentials you set on first run
-
-**Commands used **
-
-
-
-
-
-
-
+Example Docker snippet:
 
   
 
