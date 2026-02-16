@@ -42,8 +42,8 @@ Strapi available on public IP
 * Terraform installed locally or via GitHub Actions
 * SSH key for EC2 access
 
-**Project Setup**
-1️⃣ **CI Pipeline (GitHub Actions)**
+
+1️ **CI Pipeline (GitHub Actions)**
 
 **File: .github/workflows/ci.yml**
 
