@@ -75,7 +75,7 @@ Initialized Terraform:
 * Terraform apply
 * Terraform Destroy
 
-# Project Setup
+# Project setup
 
 ## Server Configuration
 
@@ -102,6 +102,17 @@ Key resources defined in main.tf:
 * EC2 instance with user_data launching Docker container
 
 Example Docker snippet:
+
+docker run -d --name strapi -p 1337:1337 noorjahan79/strapi:${IMAGE_TAG}
+
+Accessing Strapi
+
+Get the EC2 public IP from the AWS Console.
+
+Open your browser:http://<EC2_PUBLIC_IP>:1337/admin
+
+**Thank you**
+
 
   
 
