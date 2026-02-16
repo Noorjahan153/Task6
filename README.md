@@ -21,17 +21,19 @@ Features
 
 **Architecture**
 
-GitHub Push
-   ↓
-GitHub Actions (CI)
-   ↓
-Docker Hub (image stored)
-   ↓
-Terraform workflow (manual)
-   ↓
-EC2 pulls new image & runs Strapi
-   ↓
+
+GitHub Push  
+   ↓  
+GitHub Actions (CI)  
+   ↓  
+Docker Hub (image stored)  
+   ↓  
+Terraform workflow (manual)  
+   ↓  
+EC2 pulls new image & runs Strapi  
+   ↓  
 Strapi available on public IP
+
 
 
 **Prerequisites**
